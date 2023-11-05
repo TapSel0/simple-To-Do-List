@@ -9,6 +9,13 @@ def create_task(event):
         entry.delete(0, END)  # очистка поля ввода от 0 до конечного символа
 
 
+# функция перемещения задачи из одного столбца в другой
+def move_task(event, source_list, target_list):
+    selected_task = source_list.curselection()  # номер выбранной задачи
+    target_list.insert(END, source_list.get(selected_task))  # добавление выбранной задачи в след. лист
+    source_list.delete(selected_task)  # удачление задачи из предыдущего листа
+
+
 root = Tk()
 root.title("ToDoList")  # название окна
 
@@ -32,5 +39,9 @@ entry.grid(row=1, column=1, pady=5)
 button_add = Button(root, text="Add", width=10)  # кнопка для добавления
 button_add.grid(row=1, column=2, pady=5)
 button_add.bind("<Button-1>", create_task)  # забиндили функции на кнопку. Указываем её, как аргумент (то есть без скобок)
+
+# бинды для перемещения задач из 1 и 2 списка в 2 и 3 соответственно
+todo_list.bind("<Double-Button-1>", lambda a: move_task(a, todo_list, in_progress_list))
+in_progress_list.bind("<Double-Button-1>", lambda a: move_task(a, in_progress_list, done_list))
 
 root.mainloop()  # запуск главного цикла событий
