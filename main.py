@@ -31,6 +31,6 @@ entry.grid(row=1, column=1, pady=5)
 
 button_add = Button(root, text="Add", width=10)  # кнопка для добавления
 button_add.grid(row=1, column=2, pady=5)
-button_add.bind("<Button-1>", create_task)  # бинд функции на кнопку. Указываем её, как аргумент (то есть без скобок)
+button_add.bind("<Button-1>", create_task)  # забиндили функции на кнопку. Указываем её, как аргумент (то есть без скобок)
 
 root.mainloop()  # запуск главного цикла событий
